@@ -296,28 +296,7 @@ class AudioRecordManager(var lifecycle: LifecycleOwner) : LifecycleObserver {
      * pcm 格式转 MP3格式
      */
     fun pcmToMp3(pcmFile: File?) {
-        pcmFile ?: return
-        if (!pcmFile.exists()) {
-            return
-        }
-        if (!pcmFile.isFile) {
-            return
-        }
-        Observable.create(ObservableOnSubscribe<File> {
-            if (pcmFile.parentFile == null) {
-                it.onError(Throwable("文件错误"))
-            } else {
-                // val outFile = File((pcmFile.parentFile!!.absolutePath) + "/" + System.currentTimeMillis() + ".mp3")
-                it.onNext(PcmToMp3Util.pcmToMp3(pcmFile))
-            }
-        }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .`as`(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(lifecycle, Lifecycle.Event.ON_DESTROY)))
-                .subscribe({
-                    callback?.onPcmToMp3(it)
-                }, {
-                    callback?.onError(it)
-                })
+        
 
     }
 
@@ -414,29 +393,7 @@ class AudioRecordManager(var lifecycle: LifecycleOwner) : LifecycleObserver {
      * pcm 格式转 MP3格式
      */
     fun pcmToMp3222(pcmFile: File?) {
-        pcmFile ?: return
-        if (!pcmFile.exists()) {
-            return
-        }
-        if (!pcmFile.isFile) {
-            return
-        }
-        Observable.create(ObservableOnSubscribe<File> {
-            if (pcmFile.parentFile == null) {
-                it.onError(Throwable("文件错误"))
-            } else {
-//                val outFile = File((pcmFile.parentFile!!.absolutePath) + "/" + System.currentTimeMillis() + ".mp3")
-                it.onNext(PcmToMp3Util.pcmToMp3(pcmFile))
-            }
-        }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .`as`(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(lifecycle, Lifecycle.Event.ON_DESTROY)))
-                .subscribe({
-                    callback?.onPcmToMp3(it)
-                }, {
-                    callback?.onError(it)
-                })
-
+        
     }
 
 
@@ -444,28 +401,7 @@ class AudioRecordManager(var lifecycle: LifecycleOwner) : LifecycleObserver {
      * pcm 格式转 MP3格式
      */
     fun pcmToMp333(pcmFile: File?) {
-        pcmFile ?: return
-        if (!pcmFile.exists()) {
-            return
-        }
-        if (!pcmFile.isFile) {
-            return
-        }
-        Observable.create(ObservableOnSubscribe<File> {
-            if (pcmFile.parentFile == null) {
-                it.onError(Throwable("文件错误"))
-            } else {
-                val outFile = File((pcmFile.parentFile!!.absolutePath) + "/" + System.currentTimeMillis() + ".mp3")
-                it.onNext(PcmToMp3Util.convertAudioFiles(pcmFile, outFile))
-            }
-        }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .`as`(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(lifecycle, Lifecycle.Event.ON_DESTROY)))
-                .subscribe({
-                    callback?.onPcmToMp3(it)
-                }, {
-                    callback?.onError(it)
-                })
+        
 
     }
 
